@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/style.css">
+    <title>$pending</title>
+</head>
+<body>
+    <div class="container-fluid bg-success bg-opacity-75">
+        <div class="row">
+            <!-- <div class="col">
+                <p class="text-end"><a href="/dashboard">Back to dashboard</a></p>
+            </div> -->
+            <div class="col">
+                <p class="text-end"><a href="/dashboard">Back to dashboard</a> | <a href="/logout">Logout</a></p>
+            </div>
+            <div class="row text-center">
+                <h3>What did you buy now?</h3>
+            </div>
+            <div class="d-sm-block">
+                <img src="https://learn.k20center.ou.edu/lesson/224/cover_image.png?rev=16370&language=English" class="rounded mx-auto d-block" alt="Expense image">
+            </div>
+        </div>
+        <div class="m-4">
+        <form action="/add_to_db" method="POST">
+            {% with messages = get_flashed_messages(category_filter=["expense"]) %}   <!-- declare a variable called messages and adding a category filter here to flash by category -->
+                {% if messages %}                          <!-- check if there are any messages -->
+                    {% for message in messages %}         <!-- loop through the messages -->
+                        <p class="alert-danger">{{message}}</p>                 <!-- display each message in a paragraph tag -->
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="row mb-3">
+                <label class="form-label" style="font-weight:bold">Date of Purchase</label>
+                <input class="form-control" type="date" name="date">
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" style="font-weight:bold">Item</label>
+                <input class="form-control" type="text" name="item">
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" style="font-weight:bold">Description</label>
+                <input class="form-control" type="text" name="description">
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" style="font-weight:bold">Price</label>
+                <input class="form-control" type="number" name="price" min="1" max="100000">
+            </div>
+            <div class="form-check">
+                <p style="font-weight:bold">Category</p>
+                <input class="form-checkinput" type="radio" name="category" value="Need">
+                <label class="form-check-label">Need</label>
+                <input type="radio" name="category" value="Want">
+                <label>Want</label>
+            </div>
+            <div class="mb-3">
+                <!-- <label for="comments">Comments and justification</label> -->
+                <p style="font-weight:bold">Comments and justification:</p>
+                <textarea class="form-control" id="comments"name="comments" cols="30" rows="5" placeholder="Place comments and justication here"></textarea>
+            </div>
+            <button class="btn btn-primary">Add Expense</button>
+        </form>
+    </div>
+    </div>
+</body>
+</html>
